@@ -184,6 +184,11 @@ UseInitArray("use-init-array",
              cl::desc("Use .init_array instead of .ctors."),
              cl::init(false));
 
+cl::opt<bool>
+NOPInsertion("nop-insertion",
+             cl::desc("Randomly add noop instructions to create fine-grained diversity."),
+             cl::init(false));
+
 cl::opt<std::string> StopAfter("stop-after",
                             cl::desc("Stop compilation after a specific pass"),
                             cl::value_desc("pass-name"),
@@ -238,6 +243,7 @@ static inline TargetOptions InitTargetOptionsFromCodeGenFlags() {
   Options.StackAlignmentOverride = OverrideStackAlignment;
   Options.TrapFuncName = TrapFuncName;
   Options.PositionIndependentExecutable = EnablePIE;
+  Options.NOPInsertion = NOPInsertion;
   Options.UseInitArray = UseInitArray;
   Options.DataSections = DataSections;
   Options.FunctionSections = FunctionSections;

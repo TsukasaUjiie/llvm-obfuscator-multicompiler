@@ -61,7 +61,7 @@ namespace llvm {
           JITEmitDebugInfoToDisk(false), GuaranteedTailCallOpt(false),
           DisableTailCalls(false), StackAlignmentOverride(0),
           EnableFastISel(false), PositionIndependentExecutable(false),
-          UseInitArray(false), DisableIntegratedAS(false),
+          NOPInsertion(false), UseInitArray(false), DisableIntegratedAS(false),
           CompressDebugSections(false), FunctionSections(false),
           DataSections(false), TrapUnreachable(false), TrapFuncName(""),
           FloatABIType(FloatABI::Default),
@@ -164,6 +164,9 @@ namespace llvm {
     /// relocation model being in use. It's value is undefined (and irrelevant)
     /// if the relocation model is anything other than PIC.
     unsigned PositionIndependentExecutable : 1;
+
+    /// Randomly insert noop instructions to create fine-grained diversity
+    unsigned NOPInsertion : 1;
 
     /// UseInitArray - Use .init_array instead of .ctors for static
     /// constructors.
