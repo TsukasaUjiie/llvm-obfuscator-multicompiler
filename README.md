@@ -23,7 +23,7 @@ whenever using diversity options.
 
 `-mllvm -bcf` - Bogus control flow pass
 
-`-mllvm -xse` - XOR string encryption pass
+`-mllvm -xse` - XOR string encryption pass (CRASHES COMPILER, DO NOT USE!)
 
 ### NOP Insertion
 
