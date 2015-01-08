@@ -5,6 +5,7 @@ add_llvm_library(LLVMObfuscation
   Utils.cpp
   SplitBasicBlocks.cpp
   StringObfuscation.cpp
+  PrngAESCtr.cpp
   Flattening.cpp
   )
 
