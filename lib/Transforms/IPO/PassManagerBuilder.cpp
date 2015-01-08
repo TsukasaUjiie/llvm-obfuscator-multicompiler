@@ -30,6 +30,7 @@
 #include "llvm/Transforms/Obfuscation/Flattening.h"
 #include "llvm/Transforms/Obfuscation/Split.h"
 #include "llvm/Transforms/Obfuscation/Substitution.h"
+#inclide "llvm/Transforms/Obfuscation/StringObfuscation.h"
 #include "llvm/CryptoUtils.h"
 
 using namespace llvm;
@@ -69,6 +70,9 @@ static cl::opt<bool> Flattening("fla", cl::init(false),
 
 static cl::opt<bool> BogusControlFlow("bcf", cl::init(false),
                                       cl::desc("Enable bogus control flow"));
+
+static cl::opt<bool>
+StringObfuscation("xse",cl::init(false),cl::desc("Enable string encryptions"));
 
 static cl::opt<bool> Substitution("sub", cl::init(false),
                                   cl::desc("Enable instruction substitutions"));  
@@ -141,6 +145,10 @@ PassManagerBuilder::addInitialAliasAnalysisPasses(PassManagerBase &PM) const {
 void PassManagerBuilder::populateFunctionPassManager(FunctionPassManager &FPM) {
   addExtensionsToPM(EP_EarlyAsPossible, FPM);
 
+  // String Obfuscation
+  if(StringObfuscation) FPM.add(createStringObfuscation());
+
+  
   // Add LibraryInfo if we have some.
   if (LibraryInfo) FPM.add(new TargetLibraryInfo(*LibraryInfo));
 
